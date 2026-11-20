@@ -16,6 +16,9 @@ def main():
     src = os.path.join(HERE, "entry.png")
     dst = os.path.join(out_dir, "entry.png")
     shutil.copyfile(src, dst)
+    # Verify the copy is complete: a truncated output would fail the run.
+    if os.path.getsize(dst) != os.path.getsize(src):
+        raise RuntimeError("entry.png copy incomplete")
     print("wrote", dst, os.path.getsize(dst), "bytes")
 
 
